@@ -47,6 +47,7 @@ class AddBlog extends Component {
             placeholder="Blog body"
             onChange={this.handleChange}
           />
+          
           <select
             name="category"
             id="category"

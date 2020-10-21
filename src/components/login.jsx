@@ -62,7 +62,7 @@ class Login extends Component {
         </small>
         <hr />
         <small>
-          Forgot password? <a href="/forgot-password">Reset password</a>{" "}
+          Forgot password? <a href="/start-reset">Reset password</a>{" "}
         </small>
       </div>
     );

@@ -18,7 +18,6 @@ import DeleteAccount from "./components/deleteAccount";
 import ResetPassword from "./components/resetPassword";
 import StartReset from "./components/startReset";
 
-console.log(process.env.REACT_APP_BASE_URL);
 
 function App() {
   return (
