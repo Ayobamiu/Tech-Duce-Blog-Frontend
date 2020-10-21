@@ -70,31 +70,34 @@ class SignUp extends Component {
             name="username"
             id="username"
             onChange={this.handleChange}
-            placeholder="username"
+            placeholder="Username"
           />
           <input
             type="text"
             name="full_name"
             id="full_name"
             onChange={this.handleChange}
-            placeholder="full_name"
+            placeholder="Full Name"
           />
           <input
             type="email"
             name="email"
             id="email"
             onChange={this.handleChange}
-            placeholder="email"
+            placeholder="Email"
           />
           <input
             type="number"
             name="number"
             id="number"
             onChange={this.handleChange}
-            placeholder="number"
+            placeholder="Phone number"
           />
           <label htmlFor="interests">
-            <small>** select multiple interests</small>
+            <small>
+              ** hold <span className="control-key">Cntrl</span> to select
+              multiple interests
+            </small>
           </label>
           <select
             name="interests"
@@ -117,47 +120,47 @@ class SignUp extends Component {
             name="bio"
             id="bio"
             onChange={this.handleChange}
-            placeholder="bio"
+            placeholder="Short bio"
           />
           <input
             type="url"
             name="twitter_link"
             id="twitter_link"
             onChange={this.handleChange}
-            placeholder="twitter_link"
+            placeholder="Twitter link"
           />
           <input
             type="url"
             name="linkedIn_link"
             id="linkedIn_link"
             onChange={this.handleChange}
-            placeholder="linkedIn_link"
+            placeholder="LinkedIn link"
           />
           <input
             type="url"
             name="facebook_link"
             id="facebook_link"
             onChange={this.handleChange}
-            placeholder="facebook_link"
+            placeholder="Facebook link"
           />
           <input
             type="url"
             name="medium_link"
             id="medium_link"
             onChange={this.handleChange}
-            placeholder="medium_link"
+            placeholder="Medium link"
           />
           <input
             type="password"
             name="password"
             id="password"
             onChange={this.handleChange}
-            placeholder="password"
+            placeholder="Password"
           />
           <button type="submit">Sign Up</button>
         </form>
         <small>
-          Already Registered? <a href="/login">Login</a>{" "}
+          Already Registered? <a href="/login">Login</a>
         </small>
       </div>
     );

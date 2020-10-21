@@ -20,15 +20,15 @@ class Home extends Component {
         <div className="home-blogs">
           {blogs.map((blog) => (
             <div key={blog._id} className="blog">
-              <small>{blog.category}</small>
-              <h1>{blog.title} </h1>
-              <small>
+              <small className="blog-category">{blog.category}</small>
+              <div className="blog-title">{blog.title} </div>
+              <small className="blog-date">
                 <Moment format="YYYY/MM/DD">{blog.createdAt}</Moment>
               </small>
               <p>{blog.body.slice(0, 70)}..</p>
-              {blog.views}
-              <i className="fa fa-eye"></i>{" "}
-              <Link to={`/blogs/${blog._id}`}>Continue reading</Link>
+              <small className='blog-views'>{blog.views} views</small>
+              
+              <Link className='continue-reading' to={`/blogs/${blog._id}`}>Continue reading</Link>
             </div>
           ))}
         </div>
