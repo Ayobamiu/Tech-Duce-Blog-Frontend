@@ -51,6 +51,9 @@ class Blog extends Component {
     });
   };
   createComment = async (event, blog) => {
+    if (!getLoggedInUser()) {
+      window.location = "/login";
+    }
     const user = getLoggedInUser();
     event.preventDefault();
     const data = {
@@ -77,7 +80,6 @@ class Blog extends Component {
             <div className="blog-head">
               <h1>{blog.title} </h1>
               <small>{blog.category}</small>
-              <small>By {blog.owner && blog.owner.full_name}</small>
             </div>
             <small>
               <Moment fromNow>{blog.createdAt}</Moment>
@@ -91,6 +93,34 @@ class Blog extends Component {
               onClick={() => this.handleLike(blog)}
               style={{ color: blog.isLiked ? "red" : "grey" }}
             ></i>
+          </div>
+          <div className="blog-details-author">
+            <small>Author</small>
+            <div className="blog-details-author-head">
+              {blog.owner && blog.owner.full_name}{" "}
+            </div>
+            <div className="blog-details-author-links">
+              <a
+                href={blog.owner && blog.owner.linkedIn_link}
+                className="fab fa-linkedin"
+                title="LinkedIn"
+              ></a>
+              <a
+                href={blog.owner && blog.owner.twitter_link}
+                className="fab fa-twitter"
+                title="Twitter"
+              ></a>
+              <a
+                href={blog.owner && blog.owner.facebook_link}
+                className="fab fa-facebook"
+                title="Facebook"
+              ></a>
+              <a
+                href={blog.owner && blog.owner.medium_link}
+                className="fab fa-medium"
+                title="Medium"
+              ></a>
+            </div>
           </div>
         </div>
         <div className="blog-comments">

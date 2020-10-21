@@ -6,10 +6,10 @@ class Footer extends Component {
   state = {};
   seeMore = () => {
     const see_more = document.getElementById("footer-more");
-    if (see_more.style.display === "block") {
+    if (see_more.style.display === "flex") {
       see_more.style.display = "none";
     } else {
-      see_more.style.display = "block";
+      see_more.style.display = "flex";
     }
   };
   render() {
@@ -18,7 +18,7 @@ class Footer extends Component {
         <div className="footer">
           <small>TechDuce Blog</small>
           {getLoggedInUser() && <Link to="/logout">Logout</Link>}
-          <small onClick={this.seeMore}>See more</small>
+          <small className='see-more' onClick={this.seeMore}>See more</small>
         </div>
         <div className="footer-more" id="footer-more">
           {getLoggedInUser() && (
