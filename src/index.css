@@ -153,10 +153,16 @@ body {
   font-size: 28px;
   font-weight: 500;
 }
+.home-blogs-para {
+  font-family: var(--nunito);
+  font-size: 15px;
+  font-weight: 600;
+}
 .home-blogs .blog small {
   font-family: var(--nunito);
   margin-right: 10px;
 }
+
 .blog-category {
   font-family: var(--nunito);
   text-transform: uppercase;
@@ -257,7 +263,7 @@ body {
   font-size: 12px;
   margin: 5px;
 }
-.blog p {
+.blog-details .blog p {
   font-family: var(--nunito);
   font-weight: 500;
   font-size: 18px;

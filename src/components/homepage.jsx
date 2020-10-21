@@ -25,7 +25,7 @@ class Home extends Component {
               <small className="blog-date">
                 <Moment format="YYYY/MM/DD">{blog.createdAt}</Moment>
               </small>
-              <p>{blog.body.slice(0, 70)}..</p>
+              <p className='home-blogs-para'>{blog.body.slice(0, 70)}..</p>
               <small className='blog-views'>{blog.views} views</small>
               
               <Link className='continue-reading' to={`/blogs/${blog._id}`}>Continue reading</Link>
