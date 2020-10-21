@@ -16,9 +16,9 @@ class Home extends Component {
   render() {
     const blogs = this.state.blogs;
     return (
-      <div className="home">
+      <div className="home"> 
         <div className="home-blogs">
-          {blogs.map((blog) => (
+          {blogs.length===0? <h1 className='no-blogs'>No Blogs Here</h1>: blogs.map((blog) => (
             <div key={blog._id} className="blog">
               <small className="blog-category">{blog.category}</small>
               <div className="blog-title">{blog.title} </div>

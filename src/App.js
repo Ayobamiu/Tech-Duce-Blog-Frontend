@@ -15,6 +15,10 @@ import AddBlog from "./components/addBlog";
 import Footer from "./components/footer";
 import Logout from "./components/logout";
 import DeleteAccount from "./components/deleteAccount";
+import ResetPassword from "./components/resetPassword";
+import StartReset from "./components/startReset";
+
+console.log(process.env.REACT_APP_BASE_URL);
 
 function App() {
   return (
@@ -23,6 +27,8 @@ function App() {
       <ToastContainer />
       <Switch>
         <Route path="/signup" component={SignUp} />
+        <Route path="/start-reset" component={StartReset} />
+        <Route path="/reset-password/:token" component={ResetPassword} />
         <Route path="/delete-account" component={DeleteAccount} />
         <Route path="/logout" component={Logout} />
         <Route path="/login" component={Login} />

@@ -39,3 +39,16 @@ export function deleteUser(user) {
     },
   });
 }
+
+export function startPasswordReset(email) {
+  return axios.post(`${REACT_APP_BASE_URL}/users/start-reset-password`, {
+    email,
+  });
+}
+
+export function resetPassword(token, password_one, password_two) {
+  return axios.patch(`${REACT_APP_BASE_URL}/users/reset-password/${token}`, {
+    password_one,
+    password_two,
+  });
+}

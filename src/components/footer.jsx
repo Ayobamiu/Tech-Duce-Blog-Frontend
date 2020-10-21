@@ -22,7 +22,7 @@ class Footer extends Component {
         </div>
         <div className="footer-more" id="footer-more">
           {getLoggedInUser() && (
-            <Link href="/delete-account" className="close-account">
+            <Link to="/delete-account" className="close-account">
               Close your TechDuce account
             </Link>
           )}

@@ -14,7 +14,6 @@ class Login extends Component {
     
     e.preventDefault();
     const data = this.state.data;
-    console.log(data);
     try {
       const { data: response } = await loginUser(data);
       const token = response.token;

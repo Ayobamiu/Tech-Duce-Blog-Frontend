@@ -67,21 +67,23 @@ class Blog extends Component {
   };
   render() {
     let { blog, comments, likes, blogForLoggedInUser } = this.state;
-    if (getLoggedInUser) {
+    if (getLoggedInUser()) {
       blog = blogForLoggedInUser;
     }
     return (
-      <React.Fragment>
+      <div className="blog-details-page">
         <div className="blog-details">
           <div className="blog">
-            <small>{blog.category}</small>
-            <h1>{blog.title} </h1>
+            <div className="blog-head">
+              <h1>{blog.title} </h1>
+              <small>{blog.category}</small>
+              <small>By {blog.owner && blog.owner.full_name}</small>
+            </div>
             <small>
-              <Moment format="YYYY/MM/DD">{blog.createdAt}</Moment>
+              <Moment fromNow>{blog.createdAt}</Moment>
             </small>
             <p>{blog.body}</p>
-            <small>{blog.views}</small>
-            <i className="fa fa-eye"></i>
+            <small>{blog.views} views</small>
             <small>{blog.likes}</small>
             <i
               className="fa fa-thumbs-up like-control"
@@ -115,7 +117,7 @@ class Blog extends Component {
             </div>
           ))}
         </div>
-      </React.Fragment>
+      </div>
     );
   }
 }
