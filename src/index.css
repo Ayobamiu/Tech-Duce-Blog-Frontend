@@ -314,3 +314,20 @@ body {
   box-sizing: border-box;
   border-radius: 3px;
 }
+.loader {
+  border: 3px solid var(--almost-white); /* Light grey */
+  border-top: 3px solid var(--light-black); /* Blue */
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

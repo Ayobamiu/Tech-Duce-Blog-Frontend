@@ -17,6 +17,7 @@ class Blog extends Component {
     comments: [],
     likes: "",
     comment: "",
+    loading: true,
   };
   async componentDidMount() {
     const id = this.props.match.params.id;
@@ -26,9 +27,9 @@ class Blog extends Component {
     const comments = data.comments;
     if (getLoggedInUser()) {
       const { data: neww } = await getBlogByIdForLoggedInUser(id);
-      this.setState({ blogForLoggedInUser: neww.blog });
+      this.setState({ blogForLoggedInUser: neww.blog, loading: false });
     }
-    this.setState({ blog, comments, likes });
+    this.setState({ blog, comments, likes, loading: false });
   }
   handleLike = async (blog) => {
     if (!getLoggedInUser()) window.location = "/login";
@@ -70,85 +71,91 @@ class Blog extends Component {
     }
   };
   render() {
-    let { blog, comments, likes, blogForLoggedInUser } = this.state;
+    let { blog, comments, likes, blogForLoggedInUser, loading } = this.state;
     if (getLoggedInUser()) {
       blog = blogForLoggedInUser;
     }
     return (
-      <div className="blog-details-page">
-        <div className="blog-details">
-          <div className="blog">
-            <div className="blog-head">
-              <h1>{blog.title} </h1>
-              <small>{blog.category}</small>
+      <React.Fragment>
+        {loading ? (
+          <div class="loader"></div>
+        ) : (
+          <div className="blog-details-page">
+            <div className="blog-details">
+              <div className="blog">
+                <div className="blog-head">
+                  <h1>{blog.title} </h1>
+                  <small>{blog.category}</small>
+                </div>
+                <small>
+                  <Moment fromNow>{blog.createdAt}</Moment>
+                </small>
+                <p>{blog.body}</p>
+                <small>{blog.views} views</small>
+                <small>{blog.likes}</small>
+                <i
+                  className="fa fa-thumbs-up like-control"
+                  id="like-control"
+                  onClick={() => this.handleLike(blog)}
+                  style={{ color: blog.isLiked ? "red" : "grey" }}
+                ></i>
+              </div>
+              <div className="blog-details-author">
+                <small>Author</small>
+                <div className="blog-details-author-head">
+                  {blog.owner && blog.owner.full_name}{" "}
+                </div>
+                <div className="blog-details-author-links">
+                  <a
+                    href={blog.owner && blog.owner.linkedIn_link}
+                    className="fab fa-linkedin"
+                    title="LinkedIn"
+                  ></a>
+                  <a
+                    href={blog.owner && blog.owner.twitter_link}
+                    className="fab fa-twitter"
+                    title="Twitter"
+                  ></a>
+                  <a
+                    href={blog.owner && blog.owner.facebook_link}
+                    className="fab fa-facebook"
+                    title="Facebook"
+                  ></a>
+                  <a
+                    href={blog.owner && blog.owner.medium_link}
+                    className="fab fa-medium"
+                    title="Medium"
+                  ></a>
+                </div>
+              </div>
             </div>
-            <small>
-              <Moment fromNow>{blog.createdAt}</Moment>
-            </small>
-            <p>{blog.body}</p>
-            <small>{blog.views} views</small>
-            <small>{blog.likes}</small>
-            <i
-              className="fa fa-thumbs-up like-control"
-              id="like-control"
-              onClick={() => this.handleLike(blog)}
-              style={{ color: blog.isLiked ? "red" : "grey" }}
-            ></i>
+            <div className="blog-comments">
+              <h2>comments</h2>
+              <div className="add-comment">
+                <form onSubmit={(event) => this.createComment(event, blog)}>
+                  <textarea
+                    type="text"
+                    name="message"
+                    id="message"
+                    placeholder="Write your comment"
+                    onChange={this.handleChange}
+                  />
+                  <input type="submit" value="Comment" />
+                </form>
+              </div>
+              {comments.map((comment) => (
+                <div key={comment._id} className="comment">
+                  <small>{comment.owner.full_name}</small>
+                  <p>{comment.message}</p>
+                  <small>
+                    <Moment fromNow>{comment.createdAt}</Moment>
+                  </small>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="blog-details-author">
-            <small>Author</small>
-            <div className="blog-details-author-head">
-              {blog.owner && blog.owner.full_name}{" "}
-            </div>
-            <div className="blog-details-author-links">
-              <a
-                href={blog.owner && blog.owner.linkedIn_link}
-                className="fab fa-linkedin"
-                title="LinkedIn"
-              ></a>
-              <a
-                href={blog.owner && blog.owner.twitter_link}
-                className="fab fa-twitter"
-                title="Twitter"
-              ></a>
-              <a
-                href={blog.owner && blog.owner.facebook_link}
-                className="fab fa-facebook"
-                title="Facebook"
-              ></a>
-              <a
-                href={blog.owner && blog.owner.medium_link}
-                className="fab fa-medium"
-                title="Medium"
-              ></a>
-            </div>
-          </div>
-        </div>
-        <div className="blog-comments">
-          <h2>comments</h2>
-          <div className="add-comment">
-            <form onSubmit={(event) => this.createComment(event, blog)}>
-              <textarea
-                type="text"
-                name="message"
-                id="message"
-                placeholder="Write your comment"
-                onChange={this.handleChange}
-              />
-              <input type="submit" value="Comment" />
-            </form>
-          </div>
-          {comments.map((comment) => (
-            <div key={comment._id} className="comment">
-              <small>{comment.owner.full_name}</small>
-              <p>{comment.message}</p>
-              <small>
-                <Moment fromNow>{comment.createdAt}</Moment>
-              </small>
-            </div>
-          ))}
-        </div>
-      </div>
+        )}
+      </React.Fragment>
     );
   }
 }

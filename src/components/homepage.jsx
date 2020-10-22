@@ -6,31 +6,40 @@ import { Link } from "react-router-dom";
 class Home extends Component {
   state = {
     blogs: [],
+    loading: true,
   };
   async componentDidMount() {
     const { data: blogs } = await getBlogs();
     this.setState({
       blogs,
+      loading: false,
     });
   }
   render() {
-    const blogs = this.state.blogs;
+    console.log(this.state);
+    const { blogs, loading } = this.state;
     return (
-      <div className="home"> 
+      <div className="home">
         <div className="home-blogs">
-          {blogs.length===0? <h1 className='no-blogs'>No Blogs Here</h1>: blogs.map((blog) => (
-            <div key={blog._id} className="blog">
-              <small className="blog-category">{blog.category}</small>
-              <div className="blog-title">{blog.title} </div>
-              <small className="blog-date">
-                <Moment format="YYYY/MM/DD">{blog.createdAt}</Moment>
-              </small>
-              <p className='home-blogs-para'>{blog.body.slice(0, 70)}..</p>
-              <small className='blog-views'>{blog.views} views</small>
-              
-              <Link className='continue-reading' to={`/blogs/${blog._id}`}>Continue reading</Link>
-            </div>
-          ))}
+          {loading ? (
+           <div class="loader"></div>
+          ) : (
+            blogs.map((blog) => (
+              <div key={blog._id} className="blog">
+                <small className="blog-category">{blog.category}</small>
+                <div className="blog-title">{blog.title} </div>
+                <small className="blog-date">
+                  <Moment format="YYYY/MM/DD">{blog.createdAt}</Moment>
+                </small>
+                <p className="home-blogs-para">{blog.body.slice(0, 70)}..</p>
+                <small className="blog-views">{blog.views} views</small>
+
+                <Link className="continue-reading" to={`/blogs/${blog._id}`}>
+                  Continue reading
+                </Link>
+              </div>
+            ))
+          )}
         </div>
       </div>
     );
