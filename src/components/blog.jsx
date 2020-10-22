@@ -31,6 +31,7 @@ class Blog extends Component {
     this.setState({ blog, comments, likes });
   }
   handleLike = async (blog) => {
+    if (!getLoggedInUser()) window.location = "/login";
     const id = this.props.match.params.id;
     const likeButton = document.getElementById("like-control");
     if (likeButton.style.color === "grey") {
